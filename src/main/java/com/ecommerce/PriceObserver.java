@@ -1,8 +1,11 @@
-package com.ecommerce;
+package main.java.com.ecommerce;
 
 public class PriceObserver implements OrderObserver {
     @Override
     public void update(Order order) {
-        // Method signature
+        if (order.getItemCost() > 200) {
+            order.setDiscount(20.0);
+            System.out.println("PriceObserver: Applied $20 discount for order over $200");
+        }
     }
 }

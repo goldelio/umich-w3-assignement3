@@ -1,4 +1,4 @@
-package com.ecommerce;
+package main.java.com.ecommerce;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,41 +12,49 @@ public class Order {
     private List<OrderObserver> observers;
     
     public Order(String id) {
-        // Constructor signature
+        this.id = id;
+        this.itemCount = 0;
+        this.itemCost = 0.0;
+        this.shippingCost = 10.0; // Default shipping cost
+        this.discount = 0.0;
+        this.observers = new ArrayList<>();
     }
     
     public void attach(OrderObserver observer) {
-        // Method signature
+        observers.add(observer);
     }
     
     public void detach(OrderObserver observer) {
-        // Method signature
+        observers.remove(observer);
     }
     
     public void addItem(double price) {
-        // Method signature
+        this.itemCount++;
+        this.itemCost += price;
+        notifyObservers();
     }
     
     public double getTotalPrice() {
-        // Method signature
-        return 0.0;
+        return itemCost + shippingCost - discount;
     }
     
     public int getCount() {
-        // Method signature
-        return 0;
+        return itemCount;
     }
     
+    @Override
     public String toString() {
-        // Method signature
-        return "";
+        return String.format("Order ID: %s, Items: %d, Item Cost: $%.2f, Shipping: $%.2f, Discount: $%.2f, Total: $%.2f",
+                id, itemCount, itemCost, shippingCost, discount, getTotalPrice());
     }
     
     private void notifyObservers() {
-        // Method signature
+        for (OrderObserver observer : observers) {
+            observer.update(this);
+        }
     }
     
-    // Getters and setters signatures
+    // Getters and setters
     public String getId() { return id; }
     public int getItemCount() { return itemCount; }
     public double getItemCost() { return itemCost; }
