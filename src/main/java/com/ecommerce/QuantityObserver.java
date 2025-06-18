@@ -1,4 +1,3 @@
-package main.java.com.ecommerce;
 
 
 public class QuantityObserver implements OrderObserver {

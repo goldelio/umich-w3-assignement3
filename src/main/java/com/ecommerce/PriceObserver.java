@@ -1,4 +1,4 @@
-package main.java.com.ecommerce;
+
 
 public class PriceObserver implements OrderObserver {
     @Override
